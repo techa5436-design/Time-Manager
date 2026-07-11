@@ -1,0 +1,6 @@
+{
+  "name": "Daily Todo List",
+  "description": "A beautiful dark glass todo list maker with smart score tracking, custom task alarms, notifications, and historical progress reviews.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
