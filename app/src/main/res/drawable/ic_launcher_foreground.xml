@@ -3,6 +3,6 @@
     <item
         android:width="66dp"
         android:height="66dp"
-        android:drawable="@drawable/launcher_icon"
+        android:drawable="@drawable/todo_glass_logo_1783914606948"
         android:gravity="center" />
 </layer-list>

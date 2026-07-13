@@ -264,6 +264,20 @@ fun TaskGlassApp(
     }
 }
 
+fun formatTimeForDisplay(timeStr: String): String {
+    try {
+        val parts = timeStr.split(":")
+        if (parts.size == 2) {
+            val h = parts[0].toInt()
+            val m = parts[1].toInt()
+            val displayHour = if (h % 12 == 0) 12 else h % 12
+            val amPm = if (h < 12) "AM" else "PM"
+            return String.format(Locale.getDefault(), "%02d:%02d %s", displayHour, m, amPm)
+        }
+    } catch(e: Exception) {}
+    return timeStr
+}
+
 // gamification ranks
 fun getRankName(xp: Int): String {
     return when {
@@ -576,7 +590,7 @@ fun ActiveTaskItemCard(
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     // Time text
                     Text(
-                        text = task.time,
+                        text = formatTimeForDisplay(task.time),
                         fontSize = 13.sp,
                         color = if (task.status == "PENDING") Color(0xFF00E5FF) else Color(0x80FFFFFF),
                         fontWeight = FontWeight.Bold
@@ -866,7 +880,7 @@ fun HistoricalDayCard(
                             )
                         }
                         Text(
-                            text = task.time,
+                            text = formatTimeForDisplay(task.time),
                             color = Color(0x60FFFFFF),
                             fontSize = 11.sp,
                             fontWeight = FontWeight.Medium
@@ -911,6 +925,9 @@ fun AddTaskDialog(
 
     // Display formatted time state
     val timeString = String.format(Locale.getDefault(), "%02d:%02d", alarmHour, alarmMinute)
+    val displayHour = if (alarmHour % 12 == 0) 12 else alarmHour % 12
+    val amPm = if (alarmHour < 12) "AM" else "PM"
+    val displayTimeString = String.format(Locale.getDefault(), "%02d:%02d %s", displayHour, alarmMinute, amPm)
 
     Dialog(onDismissRequest = onDismiss) {
         Box(
@@ -973,7 +990,7 @@ fun AddTaskDialog(
                                 },
                                 alarmHour,
                                 alarmMinute,
-                                true
+                                false
                             )
                             tpd.show()
                         }
@@ -989,7 +1006,7 @@ fun AddTaskDialog(
                             color = Color(0x80FFFFFF)
                         )
                         Text(
-                            text = timeString,
+                            text = displayTimeString,
                             fontSize = 20.sp,
                             fontWeight = FontWeight.Black,
                             color = Color(0xFF00E5FF)

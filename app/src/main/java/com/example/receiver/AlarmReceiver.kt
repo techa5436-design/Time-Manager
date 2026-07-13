@@ -15,6 +15,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+import com.example.R
+
 class AlarmReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
@@ -72,7 +74,7 @@ class AlarmReceiver : BroadcastReceiver() {
         val soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
 
         val notification = NotificationCompat.Builder(context, channelId)
-            .setSmallIcon(android.R.drawable.ic_lock_idle_alarm) // Safe standard fallback icon
+            .setSmallIcon(android.R.drawable.ic_dialog_info)
             .setContentTitle("Task Alarm! 🔔")
             .setContentText(title)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
